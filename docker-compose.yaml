@@ -8,7 +8,7 @@ services:
     env_file: 
       - postgres.env
     volumes: 
-      - db-data:/var/lib/postgresql/data
+      - /opt/chainlink/pgdata:/var/lib/postgresql/data
 
   chainlink:
     build: .
@@ -23,8 +23,4 @@ services:
     depends_on: 
       - postgres
     volumes:
-      - chainlink_data:/chainlink
-
-volumes: 
-  db-data:
-  chainlink_data:
+      - /opt/chainlink/data:/chainlink/
