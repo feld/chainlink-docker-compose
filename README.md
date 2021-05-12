@@ -4,27 +4,29 @@ Simple docker-compose-based project to get quickly up and running a Chainlink no
 # How to use
 
 1. Clone repository
-```
-git clone https://github.com/feld/chainlink-docker-compose
-```
-1. Run `make` and document the passwords output.
+    ```
+    git clone https://github.com/feld/chainlink-docker-compose
+    ```
+    
+2. Run `make` and document the passwords output.
 
-2. Review `chainlink.env` and adapt accordingly. The generated environment file uses Rinkeby testnet. Also, the example uses Linkpool's public Ethereum service node.
+3. Review `chainlink.env` and adapt accordingly. The generated environment file uses Rinkeby testnet. Also, the example uses Linkpool's public Ethereum service node.
 
-3. Build and run with docker-compose
+4. Build and run with docker-compose
 
 * Build with default values, which you can adapt if needed inside the `Dockerfile`
-```
-docker-compose up --build
-```
+
+    ```
+    docker-compose up --build
+    ```
 
 * First build with your own build args and then run:
 
-```
-$ docker-compose build --build-arg API_USER_EMAIL=my@test.com
-
-$ docker-compose up
-```
+    ```
+    $ docker-compose build --build-arg API_USER_EMAIL=my@test.com
+    
+    $ docker-compose up
+    ```
 
 4. Browse to `localhost:6688` and log in with your credentials.
 
@@ -35,40 +37,33 @@ Default credentials:
 
 # Run with your own Ethereum local node
 
-1. Add the following into `docker-compose.yaml`:
+1. Adopt the following into `docker-compose.yaml`:
 
-- Service:
-```
-ethereum:
-    image: ethereum/client-go:v1.10.1
-    ports:
-      - 8546:8546
-    command: --ropsten --syncmode light --ws --ipcdisable --ws.addr 0.0.0.0 --ws.origins="*" --datadir /geth
-    volumes: 
-      - geth:/geth
-```
-
-- Volume:
-```
-geth:
-```
-
-So the end result would be:
-```
-volumes: 
-  geth:
-```
+    ```
+    services:
+      ethereum:
+        image: ethereum/client-go
+        ports:
+          - 8546:8546
+        command: --ropsten --syncmode light --ws --ipcdisable --ws.addr 0.0.0.0 --ws.origins="*" --datadir /geth
+        volumes: 
+          - geth:/geth
+    
+    volumes:
+      - geth:
+    ```
 
 2. Change `ETH_URL` inside `chainlink.env` to:
-```
-ETH_URL=ws://ethereum:8546
-```
+
+    ```
+    ETH_URL=ws://ethereum:8546
+    ```
 
 3. Run again:
 
-```
-$ docker-compose up --build
-```
+    ```
+    $ docker-compose up --build
+    ```
 
 # Disclaimer
 
