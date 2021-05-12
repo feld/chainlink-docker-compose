@@ -5,12 +5,13 @@ Simple docker-compose-based project to get quickly up and running a Chainlink no
 
 1. Clone repository
 ```
-git clone https://github.com/koslib/chainlink-docker-compose
+git clone https://github.com/feld/chainlink-docker-compose
 ```
+1. Run `make` and document the passwords output.
 
-1. Review `chainlink.env` and adapt accordingly. The committed environment file uses Rinkeby testnet. Also, the example uses Linkpool's public Ethereum service node.
+2. Review `chainlink.env` and adapt accordingly. The generated environment file uses Rinkeby testnet. Also, the example uses Linkpool's public Ethereum service node.
 
-2. Build and run with docker-compose
+3. Build and run with docker-compose
 
 * Build with default values, which you can adapt if needed inside the `Dockerfile`
 ```
@@ -29,8 +30,8 @@ $ docker-compose up
 
 Default credentials:
 - username: `user@example.com`
-- password: `PA@SSword1234!567`
-- wallet password: `PA@SSword1234!567`
+- password: (randomly generated)
+- wallet password: (randomly generated)
 
 # Run with your own Ethereum local node
 
@@ -56,8 +57,6 @@ So the end result would be:
 ```
 volumes: 
   geth:
-  db-data:
-  chainlink_data:
 ```
 
 2. Change `ETH_URL` inside `chainlink.env` to:
