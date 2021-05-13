@@ -1,5 +1,5 @@
-API_PASSWORD := $(shell head -c 21 /dev/random | openssl base64 -nopad)
-WALLET_PASSWORD := $(shell head -c 21 /dev/random | openssl base64 -nopad)
+API_PASSWORD := $(shell head -c 21 /dev/urandom | openssl base64 -nopad)
+WALLET_PASSWORD := $(shell head -c 21 /dev/urandom | openssl base64 -nopad)
 PG_PASSWORD := $(shell openssl rand -hex 15)
 
 all:
