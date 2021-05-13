@@ -26,7 +26,7 @@ endif
 	@echo "ENV WALLET_PASSWORD=\"$(WALLET_PASSWORD)\"" >> Dockerfile
 	@echo "" >> Dockerfile
 
-	@echo "POSTGRES_PASSWORD=\"$(PG_PASSWORD)\"" > postgres.env
+	@echo "POSTGRES_PASSWORD=$(PG_PASSWORD)" > postgres.env
 	@echo "POSTGRES_DB=chainlink" >> postgres.env
 
 	@echo $(shell sed 's/REPLACEME/$(PG_PASSWORD)/' chainlink.env.sample > chainlink.env)
