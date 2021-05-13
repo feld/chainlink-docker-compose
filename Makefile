@@ -20,15 +20,18 @@ all:
 	@echo "ARG WALLET_PASSWORD=\"$(WALLET_PASSWORD)\"" >> Dockerfile
 	@echo 'ENV WALLET_PASSWORD=$$WALLET_PASSWORD' >> Dockerfile
 	@echo "" >> Dockerfile
-	@echo "# Create chainlink node required values to initialize with" >> Dockerfile
-	@echo 'RUN echo $$API_USER_EMAIL > /chainlink/.api' >> Dockerfile
-	@echo 'RUN echo $$API_USER_PASSWORD >> /chainlink/.api' >> Dockerfile
-	@echo 'RUN echo $$WALLET_PASSWORD > /chainlink/.password' >> Dockerfile
 
 	@echo "POSTGRES_PASSWORD=\"$(PG_PASSWORD)\"" > postgres.env
 	@echo "POSTGRES_DB=chainlink" >> postgres.env
 
 	@echo $(shell sed 's/REPLACEME/$(PG_PASSWORD)/' chainlink.env.sample > chainlink.env)
+
+	@sudo mkdir -p /opt/chainlink
+	@echo '$$API_USER_EMAIL > .api'
+	@echo '$$API_USER_PASSWORD >> .api'
+	@echo '$$WALLET_PASSWORD > .password'
+	@sudo mv .api /opt/chainlink/
+	@sudo mv .password /opt/chainlink/
 
 	@echo Your PostgreSQL password is: $(PG_PASSWORD)
 	@echo Your ChainLink API password is: $(API_PASSWORD)
@@ -36,4 +39,4 @@ all:
 
 
 clean:
-	rm -f Dockerfile chainlink.env postgres.env
+	rm -f Dockerfile chainlink.env postgres.env .api .password
