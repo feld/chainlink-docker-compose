@@ -45,7 +45,9 @@ endif
 
 
 clean:
-	rm -f Dockerfile chainlink.env postgres.env .api .password
+	@rm -f Dockerfile chainlink.env postgres.env .api .password
+	@echo Remove ALL data, including deployed Postgres database? [y/n]
+	@read line; if [ $$line = "y" ]; then sudo rm -r /opt/chainlink; else echo "Aborted."; fi
 
 run:
 	docker-compose up --build
