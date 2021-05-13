@@ -46,3 +46,6 @@ endif
 
 clean:
 	rm -f Dockerfile chainlink.env postgres.env .api .password
+
+run:
+	docker-compose up --build
