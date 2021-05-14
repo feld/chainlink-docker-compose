@@ -11,7 +11,7 @@ services:
       - /opt/chainlink/pgdata:/var/lib/postgresql/data
 
   chainlink:
-    build: .
+    image: smartcontract/chainlink:0.10.6-keeper-hotfix
     env_file:
       - chainlink.env
     command: local node -p /chainlink/.password -a /chainlink/.api
