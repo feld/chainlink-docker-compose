@@ -35,8 +35,8 @@ endif
 	@echo $(EMAIL) > .api
 	@echo $(API_PASSWORD) >> .api
 	@echo $(WALLET_PASSWORD) > .password
-	@sudo mv .api /opt/chainlink/data/
-	@sudo mv .password /opt/chainlink/data/
+	@sudo install -o root -m 400 .api /opt/chainlink/data/
+	@sudo install -o root -m 400 .password /opt/chainlink/data/
 
 	@echo Your PostgreSQL password is: $(PG_PASSWORD)
 	@echo Your ChainLink API username is: $(EMAIL)
